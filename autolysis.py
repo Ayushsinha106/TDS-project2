@@ -82,23 +82,9 @@ def create_correlation_heatmap(df):
 
     return correlation_plot_path
 
-def create_bar_chart(df):
-    avg_scores = df.groupby('language')[['overall', 'quality', 'repeatability']].mean()
-    # Plot the bar chart
-    avg_scores.plot(kind='bar', figsize=(8, 6), color=['skyblue', 'orange', 'green'])
-    plt.title("Average Scores by Language", fontsize=16)
-    plt.xlabel("Language", fontsize=12)
-    plt.ylabel("Average Score", fontsize=12)
-    plt.legend(title="Score Type")
-    plt.tight_layout()
-
-    # Save as PNG
-    plt.savefig("average_scores_by_language.png")
-    plt.close()
-
 
 # Function to generate a README file summarizing the dataset analysis
-def generate_readme(df, analysis_results, correlation_plot_path,bar_chart):
+def generate_readme(df, analysis_results, correlation_plot_path):
     # Open the README file in write mode
     with open("README.md", "w", encoding="utf-8") as file:
         # Add a title and data summary section
@@ -113,8 +99,6 @@ def generate_readme(df, analysis_results, correlation_plot_path,bar_chart):
         # Add a section for data visualizations
         file.write("## Data Visualizations\n")
         file.write(f"![Correlation Heatmap]({correlation_plot_path})\n")
-        file.write(f"![Bar chart]({bar_chart})\n")
-
 # Function to read a CSV file with various encodings
 def read_csv_with_encodings(file_path):
     # List of encodings to try
@@ -147,7 +131,6 @@ def main(file_path):
     # Generate and save the correlation heatmap
     print(df)
     correlation_plot_path = create_correlation_heatmap(df)
-    bar_chart = create_bar_chart(df)
     print(f"Correlation Heatmap saved at: {correlation_plot_path}")
 
     # Query the AI model for dataset analysis insights
