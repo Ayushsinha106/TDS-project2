@@ -137,7 +137,7 @@ def main(file_path):
     analysis_results = query_llm_analysis(df)
 
     # Generate the README report with the analysis results and visualizations
-    generate_readme(df, analysis_results, correlation_plot_path, bar_chart)
+    generate_readme(df, analysis_results, correlation_plot_path)
 
 # Entry point of the script
 if __name__ == "__main__":
